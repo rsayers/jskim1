@@ -65,6 +65,6 @@ So if you  load the x register with a value, you can simply view location 00F5 t
 Credits
 -------
 
--Stian Soreng  http://www.6502asm.com/  For originally writting the JS 6502 Emulation code that is the heart of this simulator
--Nick Morgan http://skilldrick.github.io/easy6502/index.html For his modification to Stian's code, I ultimatley used his version as a base for my changes
--Rudiger Appel Http://www.3quarks.com/en/SegmentDisplay/index.html For the 7 segment display library
+* Stian Soreng  http://www.6502asm.com/  For originally writting the JS 6502 Emulation code that is the heart of this simulator
+* Nick Morgan http://skilldrick.github.io/easy6502/index.html For his modification to Stian's code, I ultimatley used his version as a base for my changes
+* Rudiger Appel Http://www.3quarks.com/en/SegmentDisplay/index.html For the 7 segment display library
