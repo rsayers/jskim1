@@ -3,10 +3,12 @@ JS Kim1
 
 This is a somewhat functional Kim1 simluator running in HTML5/JS.  This allows you to write and execute 6502 machine code in the most inefficient way possible.  It's quite a bit of fun.
 
+You can view a live demo at http://www.robsayers.com/jskim1/
+
 How to use this?
 ----------------
 
-I recommend reading (http://users.telenet.be/kim1-6502/6502/fbok.html#p5)[The First Book of Kim],  a pretty good book on the device that should get you familiar with its operation.  Feel free to ignore the section on setting vectors.  A lot of machine specific functions do not yet work, so interupts and IO specific things in particular do not work.  Any generic 6502 code I have entered has run fine however. 
+I recommend reading [http://users.telenet.be/kim1-6502/6502/fbok.html](The First Book of Kim),  a pretty good book on the device that should get you familiar with its operation.  Feel free to ignore the section on setting vectors.  A lot of machine specific functions do not yet work, so interupts and IO specific things in particular do not work.  Any generic 6502 code I have entered has run fine however. 
 
 To get started you will first press "RS"  (reset) which will give you a fresh start.  Then hit "AD" (address) and enter the address where you want your first instruction to go.  Once this is entered, hit "DA" (data) and enter the 8 bit value for that location.  Hitting "+" will advance you to the next location, but still in data mode, so you can simply enter your next instruction or operand.  The basic example from the book simply lets you swap values in two memory locations.  
 
@@ -43,7 +45,7 @@ Once this is done, the display should show "0208 00" which is where the program 
 What good is this?
 ------------------
 
-I actually built this in an attempt to win fame and fortune in the (http://www.retrochallenge.org)[RetroChallenge 2013] contest.  That said, I think it's a neat tool to see that there's even a lower langauge than assembly.  It also helps you understand how much work your assembler does for you.  LDA $01, LDA $0001, and LDA #$01 are all different instructions inside the CPU, despite the fact we give one name to all of them.
+I actually built this in an attempt to win fame and fortune in the [http://www.retrochallenge.org](RetroChallenge 2013) contest.  That said, I think it's a neat tool to see that there's even a lower langauge than assembly.  It also helps you understand how much work your assembler does for you.  LDA $01, LDA $0001, and LDA #$01 are all different instructions inside the CPU, despite the fact we give one name to all of them.
 
 What is left to do?
 -------------------
