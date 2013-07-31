@@ -1,0 +1,101 @@
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="SegmentDisplay/segment-display.js"></script>
+    <script src="simulator.js"></script>
+    <script src="kim1.js"></script>
+    <title>Kim1 Emulator</title>
+    <style>
+      .led { background-color: black; color: red; font-family: sans; font-size: 24pt; height: 75px; padding: 0px; text-align: right }
+      #kim { margin-left: auto;  margin-right: auto; background: #FFFFFF url(kim1.jpg) bottom right no-repeat; border: 2px solid black; width: 800px; height: 600px; background-position: -70px -495px }
+      #io { width:260px; margin-left: 500px; margin-top:60px; height: 510px; } 
+      #kb { margin-top: 58px; margin-left: 47px; }
+      #kb input[type=button] { width: 36px; height: 36px; color: white; background-color: black;margin-right: 7px; margin-bottom: 12px }
+      tr, td { height: 25px; }
+.switch { width: 40px; height: 36px; padding-left: 5px; margin-right:10px}
+#mem{ float:left; position: relative; left: 120px; background-color: #ccc; opacity: 0.9; top:80px }
+      Canvas { margin-left: 10px; }
+      #toolkit {
+      float:left; 
+      position: relative; 
+      left: 0px; 
+      background-color: #fff;  
+      top:0px;
+z-index: 100;
+      width: 200px;
+display:none;      
+      }
+    </style>
+
+  </head>
+
+  <div style="background-color: #ccc; border: 1px solid black; margin-bottom: 20px">
+    <h2>The Amazing JavaScript Kim1!</h2>
+   <p>Hi, thanks for stopping by to play with this virtual Kim-1.  If you aren't at all familiar with this machine,  I suggest checking out <a href="https://en.wikipedia.org/wiki/KIM-1">Wikipedia</a> for an overview.</p>
+<p>I must extend a <b>HUGE</b> debt of gratitude to  <a href="http://www.6502asm.com">Stian Soreng</a> for both writing and GPLing the actual 6502 emulator that runs this.  Additional thanks to  <a href="http://skilldrick.github.io/easy6502/index.html">Nick Morgan</a> for the changes he made as well.  I started out trying to write my own but was in over my head.  Without this excellent code, this project would not have been possible.</p>
+<p>This is actually my entry for the <a href="http://www.retrochallenge.org/">2013 Retrochallenge</a>, and as such was hacked together in a real hurry.  Also,  I knew nothing of 6502 assembly before starting, and I've never even held a Kim-1 before.  This should be a big red flag that this thing is pretty limited.  That said,  I worked through some of the example programs in <a href="http://users.telenet.be/kim1-6502/6502/fbok.html">The First Book of Kim</a> and many of the shorter programs work.  The ROM should be completely loaded, but obviously things like hardware addresses will not work.  This is best thought of as a terribly innefficent way to enter code into a generic CPU emulator, with a few hacks to make it behave like a Kim-1.</p>
+
+
+    
+  </div>
+
+
+
+  <div id="kim">
+<div id="toolkit">
+Quick enter a program.  Each line should start with an address, and then space delimited values.<br>
+<select id="examples">
+  <option value="-1">Select from below</option>
+  <option value="0">EX1 from First Book of Kim</option>
+</select>
+<textarea id="quickedit" rows="15" cols="25"></textarea><br />
+<input type="button" id="load" value="Load">
+</div>
+
+
+    <div id = "io">
+      <div id="screen">
+	<canvas id="display" width="235" height="135">
+
+</canvas>
+	
+</screen>
+<div id="kb">
+
+
+      <input type="button" class="btn" id="btn_go" value="GO">
+      <input type="button" class="btn" id="btn_st" value="ST">
+      <input type="button" class="btn" id="btn_rs" value="RS">
+      <span class="switch"><input type="checkbox" id="sst"></span>
+      <input type="button" class="btn" id="btn_ad" value="AD">
+      <input type="button" class="btn" id="btn_da" value="DA">
+      <input type="button" class="btn" id="btn_pc" value="PC">
+      <input type="button" class="btn" id="btn_plus" value="+">
+  
+      <input type="button" class="btn" id="btn_c" value="C">
+      <input type="button" class="btn" id="btn_d" value="D">
+      <input type="button" class="btn" id="btn_e" value="E">
+      <input type="button" class="btn" id="btn_f" value="F">
+  
+      <input type="button" class="btn" id="btn_8" value="8">
+      <input type="button" class="btn" id="btn_9" value="9">
+      <input type="button" class="btn" id="btn_a" value="A">
+      <input type="button" class="btn" id="btn_b" value="B">
+
+ 
+      <input type="button" class="btn" id="btn_4" value="4">
+      <input type="button" class="btn" id="btn_5" value="5">
+      <input type="button" class="btn" id="btn_6" value="6">
+      <input type="button" class="btn" id="btn_7" value="7">
+  
+      <input type="button" class="btn" id="btn_0" value="0">
+      <input type="button" class="btn" id="btn_1" value="1">
+      <input type="button" class="btn" id="btn_2" value="2">
+      <input type="button" class="btn" id="btn_3" value="3">
+ 
+</div>
+</div>
+
+<div>
+</body>
+<html>
