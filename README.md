@@ -11,23 +11,23 @@ I recommend reading (http://users.telenet.be/kim1-6502/6502/fbok.html#p5)[The Fi
 To get started you will first press "RS"  (reset) which will give you a fresh start.  Then hit "AD" (address) and enter the address where you want your first instruction to go.  Once this is entered, hit "DA" (data) and enter the 8 bit value for that location.  Hitting "+" will advance you to the next location, but still in data mode, so you can simply enter your next instruction or operand.  The basic example from the book simply lets you swap values in two memory locations.  
 
    
-   0200 A5 10    START LDA 10   address 10 to A
-   0202 A6 11          LDX 11   address 11 to x
-   0204 85 11          STA 11   A to address 11
-   0206 86 10          STX 10   X to address 10
-   0208 00             BRK      stop the program
+    0200 A5 10    START LDA 10   address 10 to A
+    0202 A6 11          LDX 11   address 11 to x
+    0204 85 11          STA 11   A to address 11
+    0206 86 10          STX 10   X to address 10
+    0208 00             BRK      stop the program
 
 
 Using the first line as an example:  the 0200 is the memory location we will use,  A5 is our instruction... in assembly it means LDA, or "Load the A register with the value found at a specific address, and 10 is the memory address we want to read the value of.  The columns after that are simply the assembly langauge in human readable format.
 
 So to run this program you would start the simulator, then type the following:
 
-   [RS] 
-   [AD] 0 2 0 0 [DA] A5 [+] 10 [+]
-   A6 [+] 11 [+]
-   85 [+] 11 [+]
-   86 [+] 10 [+]
-   00
+    [RS] 
+    [AD] 0 2 0 0 [DA] A5 [+] 10 [+]
+    A6 [+] 11 [+]
+    85 [+] 11 [+]
+    86 [+] 10 [+]
+    00
 
 And your program will be ready... but first we need to put some data in locations 10 and 11.  So then we type:
 
