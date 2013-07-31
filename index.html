@@ -25,16 +25,106 @@ z-index: 100;
       width: 200px;
 display:none;      
       }
+      #readme { display: none; }
     </style>
-
+<script>
+$(function(){
+$('#doclink').click(function(){
+if ($('#readme').is(':visible')){
+  $(this).html('Show Readme');
+  $('#readme').hide();
+}else{
+  $(this).html('Hide Readme');
+  $('#readme').show();
+}
+})});
+</script>
   </head>
 
-  <div style="background-color: #ccc; border: 1px solid black; margin-bottom: 20px">
+  <div style="background-color: #ccc; border: 1px solid black; margin-bottom: 20px; padding: 10px;">
     <h2>The Amazing JavaScript Kim1!</h2>
-   <p>Hi, thanks for stopping by to play with this virtual Kim-1.  If you aren't at all familiar with this machine,  I suggest checking out <a href="https://en.wikipedia.org/wiki/KIM-1">Wikipedia</a> for an overview.</p>
-<p>I must extend a <b>HUGE</b> debt of gratitude to  <a href="http://www.6502asm.com">Stian Soreng</a> for both writing and GPLing the actual 6502 emulator that runs this.  Additional thanks to  <a href="http://skilldrick.github.io/easy6502/index.html">Nick Morgan</a> for the changes he made as well.  I started out trying to write my own but was in over my head.  Without this excellent code, this project would not have been possible.</p>
-<p>This is actually my entry for the <a href="http://www.retrochallenge.org/">2013 Retrochallenge</a>, and as such was hacked together in a real hurry.  Also,  I knew nothing of 6502 assembly before starting, and I've never even held a Kim-1 before.  This should be a big red flag that this thing is pretty limited.  That said,  I worked through some of the example programs in <a href="http://users.telenet.be/kim1-6502/6502/fbok.html">The First Book of Kim</a> and many of the shorter programs work.  The ROM should be completely loaded, but obviously things like hardware addresses will not work.  This is best thought of as a terribly innefficent way to enter code into a generic CPU emulator, with a few hacks to make it behave like a Kim-1.</p>
+<a id="doclink" href="#">Show Readme</a>
 
+    <div id="readme" class="blob instapaper_body">
+    <article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
+<a name="js-kim1" class="anchor" href="#js-kim1"><span class="octicon octicon-link"></span></a>JS Kim1</h1>
+
+<p>This is a somewhat functional Kim1 simluator running in HTML5/JS.  This allows you to write and execute 6502 machine code in the most inefficient way possible.  It's quite a bit of fun.</p>
+
+<p>You can view a live demo at <a href="http://www.robsayers.com/jskim1/">http://www.robsayers.com/jskim1/</a></p>
+
+<h2>
+<a name="how-to-use-this" class="anchor" href="#how-to-use-this"><span class="octicon octicon-link"></span></a>How to use this?</h2>
+
+<p>I recommend reading <a href="/rsayers/jskim1/blob/master/The%20First%20Book%20of%20Kim">http://users.telenet.be/kim1-6502/6502/fbok.html</a>,  a pretty good book on the device that should get you familiar with its operation.  Feel free to ignore the section on setting vectors.  A lot of machine specific functions do not yet work, so interupts and IO specific things in particular do not work.  Any generic 6502 code I have entered has run fine however. </p>
+
+<p>To get started you will first press "RS"  (reset) which will give you a fresh start.  Then hit "AD" (address) and enter the address where you want your first instruction to go.  Once this is entered, hit "DA" (data) and enter the 8 bit value for that location.  Hitting "+" will advance you to the next location, but still in data mode, so you can simply enter your next instruction or operand.  The basic example from the book simply lets you swap values in two memory locations.  </p>
+
+<pre><code>0200 A5 10    START LDA 10   address 10 to A
+0202 A6 11          LDX 11   address 11 to x
+0204 85 11          STA 11   A to address 11
+0206 86 10          STX 10   X to address 10
+0208 00             BRK      stop the program
+</code></pre>
+
+<p>Using the first line as an example:  the 0200 is the memory location we will use,  A5 is our instruction... in assembly it means LDA, or "Load the A register with the value found at a specific address, and 10 is the memory address we want to read the value of".  The columns after that are simply the assembly langauge in human readable format.</p>
+
+<p>So to run this program you would start the simulator, then type the following:</p>
+
+<pre><code>[RS] 
+[AD] 0 2 0 0 [DA] A5 [+] 10 [+]
+A6 [+] 11 [+]
+85 [+] 11 [+]
+86 [+] 10 [+]
+00
+</code></pre>
+
+<p>And your program will be ready... but first we need to put some data in locations 10 and 11.  So then we type:</p>
+
+<pre><code>[AD] 0 0 1 0 
+[DA] 22 [+] 33
+</code></pre>
+
+<p>And that stores the hex values 22 and 33 in those locations.</p>
+
+<p>Now type [AD] 0 2 0 0, and then hit [GO]</p>
+
+<p>Once this is done, the display should show "0208 00" which is where the program halted.  Now use your [AD] button to view locations 0010 and 0011 again,  the values should be reversed.</p>
+
+<h2>
+<a name="what-good-is-this" class="anchor" href="#what-good-is-this"><span class="octicon octicon-link"></span></a>What good is this?</h2>
+
+<p>I actually built this in an attempt to win fame and fortune in the <a href="http://www.retrochallenge.org">Retrochallenge</a> contest.  That said, I think it's a neat tool to see that there's even a lower langauge than assembly.  It also helps you understand how much work your assembler does for you.  LDA $01, LDA $0001, and LDA #$01 are all different instructions inside the CPU, despite the fact we give one name to all of them.</p>
+
+<h2>
+<a name="what-is-left-to-do" class="anchor" href="#what-is-left-to-do"><span class="octicon octicon-link"></span></a>What is left to do?</h2>
+
+<p>Unfortunately very few machine specific functions work,  on a real device, hitting a button triggers an interrupt so you can actually enter input while a program is running and do something with it.  Also, each segment of each digit is independently controllable which lets you do some neat things.  None of those things work in the simulator however.  The entore stock ROM is loaded up, but I doubt many of the subroutines would have much effect since no real hardware is emulated correctly.</p>
+
+<p>The one machine specific feature that does work is the register storage buffer, a handfull of addresses that let you read the Accumulator, X, Y, Program counter, and status registers:</p>
+
+<pre><code>00EF: PCL - Program Counter - Low Order Byte    
+00F0: PGH - Program Counter - High Order Byte   
+00F1: P   - Status Register                     
+00F2: SF  - Stack Pointer                       
+00F3: A   - Accumulator                         
+00F4: Y   - Y-Index Register                    
+00F5: X   - X-Index Register       
+</code></pre>
+
+<p>So if you  load the x register with a value, you can simply view location 00F5 to see what that value is.  These locations are merely copies, and you can't set values here yourself.</p>
+
+<h2>
+<a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h2>
+
+<ul>
+<li>Stian Soreng  <a href="http://www.6502asm.com/">http://www.6502asm.com/</a>  For originally writting the JS 6502 Emulation code that is the heart of this simulator</li>
+<li>Nick Morgan <a href="http://skilldrick.github.io/easy6502/index.html">http://skilldrick.github.io/easy6502/index.html</a> For his modification to Stian's code, I ultimatley used his version as a base for my changes</li>
+<li>Rudiger Appel <a href="Http://www.3quarks.com/en/SegmentDisplay/index.html">Http://www.3quarks.com/en/SegmentDisplay/index.html</a> For the 7 segment display library</li>
+</ul></article>
+  </div>
+
+  </div>
 
     
   </div>
