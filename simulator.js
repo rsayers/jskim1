@@ -1419,14 +1419,8 @@ var message=console.log;
 	}
 
 	function updateDebugInfo() {
-	    var html = "A=$" + num2hex(regA) + " X=$" + num2hex(regX) + " Y=$" + num2hex(regY) + "<br />";
-	    html += "SP=$" + num2hex(regSP) + " PC=$" + addr2hex(regPC);
-	    html += "<br />";
-	    html += "NV-BDIZC<br />";
-	    for (var i = 7; i >=0; i--) {
-		html += regP >> i & 1;
-	    }
-	    message( html );
+	    regs();
+	    
 	    updateMonitor();
 	}
 
@@ -1434,11 +1428,11 @@ var message=console.log;
 	    var html = "A=$" + num2hex(regA) + " X=$" + num2hex(regX) + " Y=$" + num2hex(regY) + "\n";
 	    html += "SP=$" + num2hex(regSP) + " PC=$" + addr2hex(regPC);
 	    html += "\n";
-	    html += "NV-BDIZC\m";
+	    html += "NV-BDIZC\n";
 	    for (var i = 7; i >=0; i--) {
 		html += regP >> i & 1;
 	    }
-	    console.log(regs);
+	    console.log(html);
 	}
 
 	// gotoAddr() - Set PC to address (or address of label)
